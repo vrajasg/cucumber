@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Sut {
-    private PageCreator pageCreator;
     private final String siteUrl;
     private final String browserName;
     private WebDriver webDriver;
@@ -16,13 +15,6 @@ public class Sut {
     public Sut(String siteUrl, String browserName) {
         this.siteUrl = siteUrl;
         this.browserName = browserName;
-    }
-
-    public PageCreator getPageCreator() {
-        if (pageCreator == null) {
-            pageCreator = new PageCreator(getWebDriver());
-        }
-        return pageCreator;
     }
 
     public WebDriver getWebDriver() {
@@ -33,6 +25,7 @@ public class Sut {
     }
 
     public void loadApplicationUrl() {
+        getWebDriver();
         webDriver.get(this.siteUrl);
     }
 
