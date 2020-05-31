@@ -1,15 +1,17 @@
 ## Cucumber - Java
+
 #### Features:
 ```
+ - Dependency Injection via Pico-Container
+ - Run scenarios in parallel
  - Run scenarios with a specific tag
- - Suuport to run scenarios in parallel
  - Rerun failed scenarios with retry count
- - Dynamically pass AUT url at runtime 
+ - Dynamically pass AUT url at runtime
 ```
 
 #### maven command:
 ```
-mvn -U clean test -Dcucumber.options="--tags @smoke" -Dthreads=3 -Durl="http://bbc.co.uk" -Dretry=1
+mvn -U clean test -Dcucumber.options="--tags {@SCENARIO_TAG}" -Dthreads={THREADS_COUNT} -Durl={AUT_URL} -Dretry={RETRY_COUNT}
 ```
 
 ###### **AUT : _Application Under Test_**
