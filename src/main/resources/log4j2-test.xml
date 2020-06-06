@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Routing name="Routing">
+            <Routes pattern="$${ctx:logFileName}">
+                <Route>
+                    <File name="RollingFile-${ctx:logFileName}" fileName="logs/${ctx:logFileName:-log_main}.txt"
+                          immediateFlush="true" append="false">
+                        <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+                    </File>
+                </Route>
+            </Routes>
+        </Routing>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <File name="GeneralLog" fileName="logs/general_log.txt">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+    <Loggers>
+        <!-- for future implementation -->
+        <!-- <Logger name="com.hello.test1" additivity="false" level="debug">
+             <AppenderRef ref="Routing" />
+         </Logger>
+         <Logger name="com.hello.test2" additivity="false" level="debug">
+             <AppenderRef ref="LogToConsole"/>
+         </Logger>-->
+        <Root level="info">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="GeneralLog"/>
+            <AppenderRef ref="Routing"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -1,6 +1,8 @@
 package pages;
 
 import io.cucumber.java.Scenario;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +13,7 @@ public class Sut {
     private final String siteUrl;
     private final String browserName;
     private WebDriver webDriver;
+    private static final Logger logger = LogManager.getLogger(Sut.class);
 
     public Sut(String siteUrl, String browserName) {
         this.siteUrl = siteUrl;
@@ -27,11 +30,13 @@ public class Sut {
     public void loadApplicationUrl() {
         getWebDriver();
         webDriver.get(this.siteUrl);
+        logger.info("URL: {} launched in {} browser", siteUrl, browserName);
     }
 
     public void quitBrowser() {
         webDriver.quit();
         webDriver = null;
+        logger.info("browser closed");
     }
 
     public void captureScreenshot(Scenario scenario) {
