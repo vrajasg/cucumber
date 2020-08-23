@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
-        features = "src/test/java/resources/features",
+        features = "src/test/resources/features",
         glue = {"stepDefinitions"},
         plugin = {"html:target/cucumber-reports"},
         //plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},

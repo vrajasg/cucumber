@@ -1,4 +1,4 @@
-package context;
+package se.context;
 
 import org.openqa.selenium.WebDriver;
 import pages.HomePage;
