@@ -2,7 +2,7 @@
 
 #### Features:
 ```
- - Dependency Injection via Pico-Container
+ - Dependency Injection via Spring
  - Run scenarios in parallel
  - Run scenarios with a specific tag
  - Rerun failed scenarios with retry count
