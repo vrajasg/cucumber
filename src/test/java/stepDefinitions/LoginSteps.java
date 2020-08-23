@@ -1,6 +1,7 @@
 package stepDefinitions;
 
-import context.TestContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import se.context.TestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,11 +11,8 @@ import static org.hamcrest.Matchers.containsString;
 
 public class LoginSteps {
 
+    @Autowired
     private TestContext testContext;
-
-    public LoginSteps(TestContext testContext) {
-        this.testContext = testContext;
-    }
 
     @Given("I am on the Google search page")
     public void I_visit_google() {

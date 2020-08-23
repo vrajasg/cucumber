@@ -1,7 +1,7 @@
 Feature: Is it Friday yet?
   Everybody wants to know when it's Friday
 
-  @smoke1
+  @sanity
   Scenario: Finding some cheese 3
     Given I am on the Google search page
     When I search for "Cheese!"

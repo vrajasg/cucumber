@@ -11,6 +11,7 @@
     <properties>
         <threads>1</threads>
         <cucumber>5.6.0</cucumber>
+        <spring-version>5.2.8.RELEASE</spring-version>
         <allure>2.13.3</allure>
         <allure.maven>2.10.0</allure.maven>
         <hamcrest>2.2</hamcrest>
@@ -36,8 +37,18 @@
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-picocontainer</artifactId>
+            <artifactId>cucumber-spring</artifactId>
             <version>${cucumber}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring-version}</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>

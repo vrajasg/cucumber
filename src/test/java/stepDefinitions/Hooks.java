@@ -1,6 +1,7 @@
 package stepDefinitions;
 
-import context.TestContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import se.context.TestContext;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -16,12 +17,9 @@ public class Hooks {
     private static final Logger logger = LogManager.getLogger(Hooks.class);
     public static Map<Long, Scenario> scenarioMap = new ConcurrentHashMap<>();
 
+    @Autowired
     private TestContext testContext;
     private Sut sut;
-
-    public Hooks(TestContext testContext) {
-        this.testContext = testContext;
-    }
 
     @Before
     public void before(Scenario scenario) {
