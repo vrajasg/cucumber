@@ -19,6 +19,7 @@
         <webdrivermanager>4.0.0</webdrivermanager>
         <aspectj.version>1.9.5</aspectj.version>
         <log4j>2.13.3</log4j>
+        <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <maven.failsafe.plugin.version>3.0.0-M3</maven.failsafe.plugin.version>
         <skip.surefire.tests>false</skip.surefire.tests>
@@ -124,52 +125,8 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${maven.failsafe.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>solo</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                        </goals>
-                        <configuration>
-                            <properties>
-                                <property>
-                                    <name>parallel</name>
-                                    <value>methods</value>
-                                </property>
-                                <property>
-                                    <name>dataproviderthreadcount</name>
-                                    <value>25</value>
-                                </property>
-                                <property>
-                                    <name>listener</name>
-                                    <value>retryHelpers.RetryListener</value>
-                                </property>
-                            </properties>
-                            <!--suppress UnresolvedMavenProperty -->
-                            <argLine>
-                                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                                -Dcucumber.options="--tags ${tags} --tags ~@ignore --plugin json:target/cucumber-reports/solo.json --plugin
-                                io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"
-                            </argLine>
-                            <includes>
-                                <include>**/runner.RunCucumberTest.java</include>
-                            </includes>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>verify</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin-version}</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
@@ -186,6 +143,5 @@
                 </configuration>
             </plugin>
         </plugins>
-
     </build>
 </project>
