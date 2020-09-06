@@ -13,6 +13,7 @@
         <cucumber>5.6.0</cucumber>
         <allure>2.13.3</allure>
         <allure.maven>2.10.0</allure.maven>
+        <allure.maven.commandline>2.13.5</allure.maven.commandline>
         <hamcrest>2.2</hamcrest>
         <webdriver>3.141.59</webdriver>
         <webdrivermanager>4.0.0</webdrivermanager>
@@ -60,11 +61,6 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber5-jvm</artifactId>
             <version>${allure}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-maven</artifactId>
-            <version>${allure.maven}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -120,6 +116,18 @@
                         <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <!--Allure-Report-Generation-->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.maven}</version>
+                <configuration>
+                    <reportVersion>${allure.maven.commandline}</reportVersion>
+                    <allureDownloadUrl>
+                        https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/${allure.maven.commandline}/allure-commandline-${allure.maven.commandline}.zip
+                    </allureDownloadUrl>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

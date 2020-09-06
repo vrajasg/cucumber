@@ -16,8 +16,11 @@
 ```
 mvn -U clean test -Dcucumber.filter.tags="{@SCENARIO_TAG}" -Dthreads={THREADS_COUNT} -Durl={AUT_URL} -Dretry={RETRY_COUNT}
 
-Example:
+Example # 1: 
 mvn -U clean test -Dcucumber.filter.tags="@sanity" -Dthreads=3 -Durl=https://bbc.co.uk -Dretry=1
+
+Example # 2: Generate Allure-Report locally
+mvn -U clean test -Dcucumber.filter.tags="@sanity" -Dthreads=3 -Durl=https://bbc.co.uk -Dretry=1 allure:serve
 ```
 
 ###### **AUT : _Application Under Test_**
