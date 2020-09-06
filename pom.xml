@@ -14,11 +14,13 @@
         <spring-version>5.2.8.RELEASE</spring-version>
         <allure>2.13.3</allure>
         <allure.maven>2.10.0</allure.maven>
+        <allure.maven.commandline>2.13.5</allure.maven.commandline>
         <hamcrest>2.2</hamcrest>
         <webdriver>3.141.59</webdriver>
         <webdrivermanager>4.0.0</webdrivermanager>
         <aspectj.version>1.9.5</aspectj.version>
         <log4j>2.13.3</log4j>
+        <slf4j-version>1.7.30</slf4j-version>
         <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <maven.failsafe.plugin.version>3.0.0-M3</maven.failsafe.plugin.version>
@@ -68,13 +70,8 @@
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber4-jvm</artifactId>
+            <artifactId>allure-cucumber5-jvm</artifactId>
             <version>${allure}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-maven</artifactId>
-            <version>${allure.maven}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -85,6 +82,11 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4j}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j-version}</version>
         </dependency>
     </dependencies>
 
@@ -112,8 +114,11 @@
                     </properties>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Dcucumber.options="--plugin io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"
+                        -Dcucumber.plugin="io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
                     </argLine>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -122,6 +127,18 @@
                         <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <!--Allure-Report-Generation-->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.maven}</version>
+                <configuration>
+                    <reportVersion>${allure.maven.commandline}</reportVersion>
+                    <allureDownloadUrl>
+                        https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/${allure.maven.commandline}/allure-commandline-${allure.maven.commandline}.zip
+                    </allureDownloadUrl>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
