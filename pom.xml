@@ -11,6 +11,7 @@
     <properties>
         <threads>1</threads>
         <cucumber>5.6.0</cucumber>
+        <maven-cucumber-html-report>5.3.0</maven-cucumber-html-report>
         <extentreports-cucumber5-adapter>1.5.1</extentreports-cucumber5-adapter>
         <allure>2.13.3</allure>
         <allure.maven>2.10.0</allure.maven>
@@ -155,6 +156,39 @@
                         <dependencyConvergence/>
                     </rules>
                 </configuration>
+            </plugin>
+            <!--Plugin to generate cucumber-html-reports via maven verify phase-->
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>${maven-cucumber-html-report}</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>Cucumber</projectName>
+                            <skip>false</skip>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <inputDirectory>${project.build.directory}/cucumber-reports</inputDirectory>
+                            <jsonFiles>
+                                <param>**/*.json</param>
+                            </jsonFiles>
+                            <classificationDirectory>${project.build.directory}</classificationDirectory>
+                            <classificationFiles>
+                                <param>sample.properties</param>
+                                <param>other.properties</param>
+                            </classificationFiles>
+                            <!--<parallelTesting>false</parallelTesting>-->
+                            <mergeFeaturesById>false</mergeFeaturesById>
+                            <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>
+                            <checkBuildResult>false</checkBuildResult>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
