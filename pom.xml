@@ -12,6 +12,7 @@
         <threads>1</threads>
         <cucumber>5.6.0</cucumber>
         <spring-version>5.2.8.RELEASE</spring-version>
+        <extentreports-cucumber5-adapter>1.5.1</extentreports-cucumber5-adapter>
         <allure>2.13.3</allure>
         <allure.maven>2.10.0</allure.maven>
         <allure.maven.commandline>2.13.5</allure.maven.commandline>
@@ -22,7 +23,7 @@
         <log4j>2.13.3</log4j>
         <slf4j-version>1.7.30</slf4j-version>
         <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
-        <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
         <maven.failsafe.plugin.version>3.0.0-M3</maven.failsafe.plugin.version>
         <skip.surefire.tests>false</skip.surefire.tests>
     </properties>
@@ -73,6 +74,12 @@
             <artifactId>allure-cucumber5-jvm</artifactId>
             <version>${allure}</version>
         </dependency>
+        <!--ExtentReports version 4 for Cucumber-5-->
+        <dependency>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extentreports-cucumber5-adapter</artifactId>
+            <version>${extentreports-cucumber5-adapter}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -98,6 +105,7 @@
                 <version>${maven.surefire.plugin.version}</version>
                 <configuration>
                     <skip>${skip.surefire.tests}</skip>
+                    <testFailureIgnore>true</testFailureIgnore>
                     <properties>
                         <property>
                             <name>parallel</name>
