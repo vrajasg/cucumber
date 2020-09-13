@@ -7,9 +7,11 @@ import org.testng.annotations.DataProvider;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"stepDefinitions"},
-        plugin = {"html:target/cucumber-reports"},
-        //plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/report.html"},
-        tags = {"not @ignore","not @bug"},
+        plugin = {"pretty",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
+                "html:target/cucumber-reports",
+                "json:target/cucumber-reports/Cucumber.json"},
+        tags = {"not @ignore", "not @bug"},
         monochrome = true
 )
 public class RunCucumberTest extends AbstractTestNGCucumberTests {

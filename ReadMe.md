@@ -8,7 +8,10 @@
  - Rerun failed scenarios with retry count
  - Dynamically pass AUT url at runtime
  - Hamcrest - for customized assertion matchers
- - Allure Report
+ - Reporting:
+     - Cucumber Reports
+     - Allure Reports
+     - Extent Reports (created inside 'test-output' folder)
  - Log4j2 logging - for each scenario 
 ```
 
@@ -16,10 +19,10 @@
 ```
 mvn -U clean test -Dcucumber.filter.tags="{@SCENARIO_TAG}" -Dthreads={THREADS_COUNT} -Durl={AUT_URL} -Dretry={RETRY_COUNT}
 
-Example # 1: 
+Example # 1: Run Tests
 mvn -U clean test -Dcucumber.filter.tags="@sanity" -Dthreads=3 -Durl=https://bbc.co.uk -Dretry=1
 
-Example # 2: Generate Allure-Report locally
+Example # 2: To generate Allure-Report locally
 mvn -U clean test -Dcucumber.filter.tags="@sanity" -Dthreads=3 -Durl=https://bbc.co.uk -Dretry=1 allure:serve
 ```
 
