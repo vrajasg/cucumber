@@ -3,7 +3,7 @@
 #### Features:
 ```
  - Dependency Injection via Pico-Container
- - Run scenarios in parallel
+ - Run scenarios in parallel (Cucumber - TestNg)
  - Run scenarios with a specific tag
  - Rerun failed scenarios with retry count
  - Dynamically pass AUT url at runtime
