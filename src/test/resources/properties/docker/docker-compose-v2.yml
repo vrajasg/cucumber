@@ -1,0 +1,36 @@
+# To execute this docker-compose yml file use `docker-compose -f docker-compose-v2.yml up`
+# Add the `-d` flag at the end for detached execution
+# to scale nodes ``docker-compose -f docker-compose-v2.yml up --scale chrome=2 -d
+# To stop the execution, hit Ctrl+C, and then `docker-compose -f docker-compose-v2.yml down`
+version: '2'
+services:
+  chrome:
+    image: selenium/node-chrome:latest
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+  firefox:
+    image: selenium/node-firefox:latest
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+      NODE_MAX_SESSION: 2
+      NODE_MAX_INSTANCES: 2
+  opera:
+    image: selenium/node-opera:latest
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      HUB_HOST: hub
+  hub:
+    image: selenium/hub:latest
+    ports:
+      - "4444:4444"

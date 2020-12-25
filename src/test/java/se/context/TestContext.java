@@ -1,26 +1,13 @@
 package se.context;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.openqa.selenium.WebDriver;
-import pages.HomePage;
+import webdriver.WebDriverProvider;
 
+@Getter
+@Setter
 public class TestContext {
-
-    WebDriver driver;
-    HomePage homePage;
-
-    public WebDriver getDriver() {
-        return this.driver;
-    }
-
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    public HomePage getHomePage() {
-        return this.homePage;
-    }
-
-    public void initializePageObjects() {
-        this.homePage = new HomePage(this.driver);
-    }
+    private WebDriver webDriver;
+    private WebDriverProvider webDriverProvider;
 }

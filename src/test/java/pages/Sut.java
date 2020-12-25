@@ -3,48 +3,66 @@ package pages;
 import io.cucumber.java.Scenario;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import se.context.TestContext;
+import webdriver.WebDriverProvider;
+
+import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 public class Sut {
-    private final String siteUrl;
-    private final String browserName;
+
+    private static final String browser = System.getProperty("browser", CHROME);
+    private static final String SCREENSHOT_MEDIA_TYPE = "image/png";
+    private WebDriverProvider webDriverProvider;
     private WebDriver webDriver;
+    private static final ThreadLocal<Sut> sut = new ThreadLocal<>();
     private static final Logger logger = LogManager.getLogger(Sut.class);
+    private TestContext testContext;
 
-    public Sut(String siteUrl, String browserName) {
-        this.siteUrl = siteUrl;
-        this.browserName = browserName;
+    public Sut(TestContext testContext) {
+        this.testContext = testContext;
     }
 
-    public WebDriver getWebDriver() {
-        if (webDriver == null) {
-            webDriver = new WebDriverProvider(browserName, "", new DesiredCapabilities()).webDriver();
+    public WebDriverProvider getWebDriverProvider() {
+        if (webDriverProvider == null) {
+            webDriverProvider = new WebDriverProvider(browser, "", new DesiredCapabilities());
+            testContext.setWebDriverProvider(webDriverProvider);
         }
-        return webDriver;
+        return webDriverProvider;
     }
 
-    public void loadApplicationUrl() {
-        getWebDriver();
-        webDriver.get(this.siteUrl);
-        logger.info("URL: {} launched in {} browser", siteUrl, browserName);
+    public void addScreenshotToScenario(Scenario scenario) {
+        byte[] screenshot = SeleniumWrapper.takeScreenshot(testContext.getWebDriver());
+        scenario.embed(screenshot, SCREENSHOT_MEDIA_TYPE, scenario.getName());
     }
 
-    public void quitBrowser() {
-        webDriver.quit();
-        webDriver = null;
-        logger.info("browser closed");
+    public static Sut getSut(TestContext testContext) {
+        Sut currentSut = sut.get();
+        if (currentSut == null) {
+            logger.info("Initialise - Sut: Start");
+            currentSut = new Sut(testContext);
+            sut.set(currentSut);
+        }
+        return currentSut;
     }
 
-    public void captureScreenshot(Scenario scenario) {
-        try {
-            byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
-            scenario.embed(screenshot, "image/png");
-        } catch (WebDriverException somePlatformsDontSupportScreenshots) {
-            throw new RuntimeException(somePlatformsDontSupportScreenshots);
+    public void stopSut() {
+        Sut currentSut = sut.get();
+        if (currentSut != null) {
+            testContext.getWebDriver().quit();
+            testContext.setWebDriver(null);
+            testContext.setWebDriverProvider(null);
+            sut.remove();
+            testContext = null;
+            logger.info("CleanUp - Sut: End");
+        }
+    }
+
+    public void initWebDriver() {
+        if (webDriver == null) {
+            webDriver = getWebDriverProvider().webDriver();
+            testContext.setWebDriver(webDriver);
         }
     }
 }
