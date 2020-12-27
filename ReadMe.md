@@ -36,7 +36,7 @@
 mvn -U clean test -Dcucumber.filter.tags="{@SCENARIO_TAG}" -Dthreads={THREADS_COUNT} -Durl={AUT_URL} -Dretry={RETRY_COUNT}
 
 Example # 1: Run Tests
-mvn -U clean test -Dcucumber.filter.tags="@sanity" -Dthreads=3 -Durl=https://bbc.co.uk -Dretry=1
+mvn -U clean test -Dcucumber.filter.tags="@sanity" -Dthreads=3 -Durl=https://google.co.uk -Dretry=1
 
 Example # 2: To generate Allure-Report locally
 mvn -U clean test -Dcucumber.filter.tags="@sanity" -Dthreads=3 -Durl=https://www.google.co.uk -Dretry=1 allure:serve

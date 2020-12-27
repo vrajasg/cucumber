@@ -10,7 +10,8 @@ import org.testng.annotations.DataProvider;
         plugin = {"pretty",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
                 "html:target/cucumber-reports",
-                "json:target/cucumber-reports/Cucumber.json"},
+                "json:target/cucumber-reports/Cucumber.json",
+                "com.epam.reportportal.cucumber.ScenarioReporter"},
         tags = {"not @ignore", "not @bug"},
         monochrome = true
 )
