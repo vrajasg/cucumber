@@ -34,7 +34,7 @@ public class Sut {
 
     public void addScreenshotToScenario(Scenario scenario) {
         byte[] screenshot = SeleniumWrapper.takeScreenshot(testContext.getWebDriver());
-        scenario.embed(screenshot, SCREENSHOT_MEDIA_TYPE, scenario.getName());
+        scenario.attach(screenshot, SCREENSHOT_MEDIA_TYPE, scenario.getName());
     }
 
     public static Sut getSut(TestContext testContext) {

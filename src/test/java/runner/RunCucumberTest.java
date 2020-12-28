@@ -9,9 +9,10 @@ import org.testng.annotations.DataProvider;
         glue = {"stepDefinitions"},
         plugin = {"pretty",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-                "html:target/cucumber-reports",
-                "json:target/cucumber-reports/Cucumber.json"},
-        tags = {"not @ignore", "not @bug"},
+                "html:target/cucumber-report",
+                "json:target/cucumber-reports/Cucumber.json",
+                "com.epam.reportportal.cucumber.ScenarioReporter"},
+        tags = "not @ignore and not @bug",
         monochrome = true
 )
 public class RunCucumberTest extends AbstractTestNGCucumberTests {

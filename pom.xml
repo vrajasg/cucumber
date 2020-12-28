@@ -10,12 +10,12 @@
 
     <properties>
         <threads>1</threads>
-        <cucumber>5.6.0</cucumber>
-        <maven-cucumber-html-report>5.3.0</maven-cucumber-html-report>
-        <extentreports-cucumber5-adapter>1.5.1</extentreports-cucumber5-adapter>
-        <allure>2.13.3</allure>
+        <cucumber>6.8.1</cucumber>
+        <maven-cucumber-html-report>5.4.0</maven-cucumber-html-report>
+        <extentreports-cucumber6-adapter>2.6.0</extentreports-cucumber6-adapter>
+        <allure>2.13.8</allure>
         <allure.maven>2.10.0</allure.maven>
-        <allure.maven.commandline>2.13.5</allure.maven.commandline>
+        <allure.maven.commandline>2.13.8</allure.maven.commandline>
         <hamcrest>2.2</hamcrest>
         <webdriver>3.141.59</webdriver>
         <webdrivermanager>4.0.0</webdrivermanager>
@@ -27,7 +27,19 @@
         <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
         <maven.failsafe.plugin.version>3.0.0-M3</maven.failsafe.plugin.version>
         <skip.surefire.tests>false</skip.surefire.tests>
+        <reportportal>5.0.1</reportportal>
     </properties>
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-epam-reportportal</id>
+            <name>bintray</name>
+            <url>http://dl.bintray.com/epam/reportportal</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -62,14 +74,14 @@
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber5-jvm</artifactId>
+            <artifactId>allure-cucumber6-jvm</artifactId>
             <version>${allure}</version>
         </dependency>
-        <!--ExtentReports version 4 for Cucumber-5-->
+        <!--ExtentReports version 4 for Cucumber-6-->
         <dependency>
             <groupId>tech.grasshopper</groupId>
-            <artifactId>extentreports-cucumber5-adapter</artifactId>
-            <version>${extentreports-cucumber5-adapter}</version>
+            <artifactId>extentreports-cucumber6-adapter</artifactId>
+            <version>${extentreports-cucumber6-adapter}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -91,6 +103,11 @@
             <artifactId>lombok</artifactId>
             <version>${lombok}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>agent-java-cucumber6</artifactId>
+            <version>${reportportal}</version>
         </dependency>
     </dependencies>
 
@@ -119,7 +136,7 @@
                     </properties>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Dcucumber.plugin="io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
+                        -Dcucumber.plugin="io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"
                     </argLine>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
