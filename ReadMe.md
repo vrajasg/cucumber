@@ -25,6 +25,7 @@
 ```
  - java
  - cucumber-jvm + cucumber-testng
+ - selenium webdriver
  - lombok
  - Hamcrest
  - Log4j2
